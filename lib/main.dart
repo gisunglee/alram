@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'story.dart';
+import 'vo/story.dart';
 import 'package:alram/view/daybar.dart';
 
 void main() {
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '100억 벌어 룸싸롱 가자',
+      title: '100억 벌어 야호 하자',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -24,32 +24,13 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatelessWidget {
   TimeOfDay _time = new TimeOfDay.now();
 
-  List<Story> _stories = [
-    Story(
-        "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        "월"),
-    Story(
-        "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        "화"),
-    Story(
-        "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        "수"),
-    Story(
-        "https://images.pexels.com/photos/1124724/pexels-photo-1124724.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        "목"),
-    Story(
-        "https://images.pexels.com/photos/1845534/pexels-photo-1845534.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        "금"),
-    Story(
-        "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        "토"),
-    Story(
-        "https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-        "일")
-  ];
+
 
   @override
   Widget build(BuildContext context) {
+
+    final Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('EazyFast Alarm'),
@@ -84,7 +65,8 @@ class MyHomePage extends StatelessWidget {
                       return null;
                     },
                   ),
-                  _daybar,
+                  Daybar(),
+                  _timeList(size),
                   Image.network(
                       "https://miro.medium.com/max/451/1*mHMr5eihoBMY4NfP-CY2EA.png"),
                   ListTile(
@@ -111,63 +93,28 @@ class MyHomePage extends StatelessWidget {
     );
   }
 
-  Widget get _daybar => Container(
-        child: SingleChildScrollView(
+
+  Widget _timeList(Size size) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(17)),
+        elevation: 16,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 12.0, right: 12, top: 12, bottom: 32),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
               Container(
-                // width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.symmetric(
-                  vertical: 10,
-                ),
-                height: 90,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  children: _stories.map((story) {
-                    return Column(
-                      children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.symmetric(
-                            horizontal: 3.8,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(40),
-                            border: Border.all(
-                              width: 3,
-                              color: Color(Colors.yellow.value),
-                            ),
-                          ),
-                          child: Container(
-                            padding: EdgeInsets.all(
-                              2,
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(50),
-                              //child: Text(story.name, style: TextStyle(fontWeight: FontWeight.bold),),
-                              child: Image(
-                                image: NetworkImage(story.image),
-                                width: 41,
-                                height: 41,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(story.name),
-                      ],
-                    );
-                  }).toList(),
-                ),
+                height: 8,
               ),
             ],
           ),
         ),
-      );
+      ),
+    );
+  }
+
+
 }
 

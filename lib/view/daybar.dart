@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:alram/story.dart';
+import 'package:alram/vo/story.dart';
 
 
-class MainPage extends StatelessWidget{
+class Daybar extends StatelessWidget{
 
   List<Story> _stories = [
     Story(
@@ -30,11 +30,7 @@ class MainPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('망고를 원 없이 먹자'),
-      ),
-      body: Container(
+    return Container(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -91,7 +87,6 @@ class MainPage extends StatelessWidget{
             ],
           ),
         ),
-      ),
     );
   }
 }
